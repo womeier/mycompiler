@@ -57,7 +57,9 @@ let () =
       let input = read_text_from_file !input_file in
       let input_bytestring = Caml_bytestring.bytestring_of_caml_string input in
       debug_print "Calling extracted Rocq pipeline...\n";
-      let output_bytestring = Pipeline.compile input_bytestring in
-      let output = Caml_bytestring.caml_string_of_bytestring output_bytestring in
-      debug_print "Writing output file...\n";
-      write_text_to_file !output_file output
+      match Pipeline.compile input_bytestring with
+      | None -> Printf.fprintf stdout "Error: Calling extracted Rocq pipeline yielded None\n."; exit 0
+      | Some output_bytestring ->
+          let output = Caml_bytestring.caml_string_of_bytestring output_bytestring in
+          debug_print "Writing output file...\n";
+          write_text_to_file !output_file output

@@ -27,6 +27,10 @@ src/extraction: theories/extraction/extraction.vo
 src/extraction/pipeline.cmo : src/extraction
 	@cd src/extraction && ocamlc \
 		Byte.mli \
+		BinNums.mli \
+		Datatypes.mli \
+		BinPos.mli \
+		BinInt.mli \
 		bytestring.mli \
 		MCString.mli \
 		pipeline.mli
@@ -41,6 +45,10 @@ mycompiler: src/utils/caml_bytestring.cmo src/main.ml
 	ocamlc -I src/extraction/ -I src/utils \
 		src/utils/caml_byte.cmo \
 		src/utils/caml_bytestring.cmo \
+		src/extraction/BinNums.cmo \
+		src/extraction/Datatypes.cmo \
+		src/extraction/BinPos.cmo \
+		src/extraction/BinInt.cmo \
 		src/extraction/bytestring.cmo \
 		src/extraction/MCString.cmo \
 		src/extraction/pipeline.cmo \
