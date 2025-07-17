@@ -1,8 +1,8 @@
 all: Makefile.coq mycompiler
-	@+$(MAKE) -f Makefile.coq all
+	make -f Makefile.coq all
 
 clean: Makefile.coq
-	@+$(MAKE) -f Makefile.coq cleanall
+	make -f Makefile.coq cleanall
 	@rm -f Makefile.coq Makefile.coq.conf
 	@find . -name *.cmi -delete
 	@find . -name *.cmo -delete
@@ -13,10 +13,8 @@ clean: Makefile.coq
 Makefile.coq: _CoqProject
 	$(COQBIN)coq_makefile -f _CoqProject -o Makefile.coq
 
-force _CoqProject Makefile: ;
-
-%: Makefile.coq force
-	@+$(MAKE) -f Makefile.coq $@
+%: Makefile.coq
+	make -f Makefile.coq $@
 
 # ===========================================
 # Combine extracted code to binary mycompiler
@@ -57,4 +55,4 @@ mycompiler: src/utils/caml_bytestring.cmo src/main.ml
 # ===========================================
 # Combine extracted code to binary mycompiler
 
-.PHONY: all clean force
+.PHONY: all clean
