@@ -4,7 +4,6 @@
   which,
   coq,
   metacoq,
-  pkgs,
   version ? null,
 }:
 
@@ -13,7 +12,7 @@ mkCoqDerivation {
   pname = "mycompiler";
   inherit version;
 
-  propagatedBuildInputs = [ metacoq pkgs.tree ];
+  propagatedBuildInputs = [ metacoq ];
   mlPlugin = true;
 
   installPhase = ''
